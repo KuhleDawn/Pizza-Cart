@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta HTTP-EQUIV="X-UA-Compatible" content="IE=edge">
+    <meat name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Perfect Pizza</title>
+        <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+
+    
+  <div class="pizza"
+  x-data="{small:0, medium:0, large:0, Grandtotal:0, get total(){ return (this.small * 49.99 + this.medium * 89.99 + this.large * 120.00 ).toFixed(2)}, GrandTotal:0, checkout: false, paid:''}">
+  <div>
+      <h1 class="section-header" style="text-align: center; color: #04010f;"><strong>Perfect Pizza</strong></h1>
+  </div>
+
+  <div class="">
+      <div class="cart" x-show="small != 0 || medium != 0 || large != 0">
+
+          <template x-if="small > 0">
+              <div class="small-cart">
+                  Small:
+                  <template x-if="!checkout">
+                      <button class="pizza" @click="small++">+</button> </template><span
+                      x-text="small"></span><template x-if="!checkout"><button class="pizza"
+                          @click="small--">-</button></template>
+                  <span>Price: R<span x-text="(small * 49.99).toFixed(2)"></span></span>
+              </div>
+          </template>
+
+          <template x-if="medium > 0">
+              <div class="medium-cart">
+                  medium:
+                  <template x-if="!checkout">
+                      <button class="pizza" @click="medium++">+</button> </template><span
+                      x-text="medium"></span><template x-if="!checkout"><button class="pizza"
+                          @click="medium--">-</button></template>
+                  <span>Price: R<span x-text="(medium * 89.99).toFixed(2)"></span></span>
+              </div>
+          </template>
+
+          <template x-if="large > 0">
+              <div class="large-cart">
+                  Large:
+                  <template x-if="!checkout">
+                      <button class="pizza" @click="large++">+</button> </template><span
+                      x-text="large"></span><template x-if="!checkout"><button class="pizza"
+                          @click="large--">-</button></template>
+                  <span>Price: R<span x-text="(large * 120.00).toFixed(2)"></span></span>
+              </div>
+              <span>Grand total: R<span
+                      x-text="((small * 49.99) + (medium * 89.99) + (large * 120.00)).toFixed(2)"></span></span>
+          </template>
+
+
+          <template x-if="!checkout">
+              <button class="Pizza" @click="checkout=!checkout">Checkout</button>
+          </template>
+          <template x-if="checkout">
+              <label>Amount received from customer: R<input type="number" min="0" step="0.00"
+                      x-model="paid" /></label>
+          </template>
+          <template x-if="paid == total && checkout">
+           
+              <span>
+                  <div style="color: rgb(19, 1, 1)">Enjoy your pizza! </div>
+                  <button class="Mdesign AW Bdesign" @click="small=0; medium=0; large=0; checkout=false;">
+                      Complete Order
+                  </button>
+              </span>
+          </template>
+          <template x-if="(parseInt(paid) < total && paid != total && checkout)">
+             
+
+              <span>
+                  <div style="color: #0000004b;">
+                      <h2><strong>There is no enough funds</strong></h2>
+
+                  </div>
+                  <div style="color: rgb(6, 14, 2);">
+                      <h2>You need for this item:</h2>
+                      <span x-text="(total - parseInt(paid) ).toFixed(2)"></span>
+                  </div>
+                  <button class="pizza" @click="small=0; medium=0; large=0; checkout=false;">
+                      <div style="color: #0f0202;">
+
+                      </div>
+                      Exit-Cart
+                  </button>
+              </span>
+          </template>
+          <template x-if="parseInt(paid) > total && checkout">
+              <span>
+                  <div style="color: rgb(1, 14, 3)">
+                      <br>
+
+                      THANK YOU FOR SHOPPING WITH US, ENJOY!!, Here's your change: R<span
+                          x-text="(parseInt(paid) - total).toFixed(2)"></span>
+                  </div>
+                  <button class="Pizza" @click="small=0; medium=0; large=0; checkout=false; paid=''">
+                      Complete transaction
+                  </button>
+              </span>
+          </template>
+
+      </div>
+
+
+    <div class="Pizzas">
+
+    <div class="pizzas">
+        <div class="pizza large_pizza">
+            <h2>Large Pizza</h2>
+            <img src="pizza-menu.png" width="150">
+            <br>
+            R120.00
+            <ul>
+              <li>Large pizza with meat and mashrooms</li>
+              <li>pizza with humm and BBQ beef</li>
+            </ul>
+            <div>
+              <button style="text-align: center; color: #111111;" @click="large++">BUY</button>
+            </div>
+          </div>
+    
+
+        <div class="pizza medium_pizza">
+            <h2>Medium Pizza</h2>
+            <img src="pizza-menu.png" width="150">
+            <br>
+            R89.00
+            <ul>
+              <li>pizza with chicken meat</li>
+              <li>Marshroom Pizza</li>
+            </ul>
+    
+            <div>
+              <button style="text-align: center; color: #111111;" @click="medium++">BUY</button>
+            </div>
+          </div>
+
+        <div class="pizza small_pizza">
+            <h2>Small Pizza</h2>
+            <img src="pizza-menu.png" width="150">
+            <br>
+            R49.99
+            <ul>
+              <li>Small pizza with Ham, pineapple</li>
+              <li>Small Pizza  </li> 
+            </ul>
+    
+            <div>
+              <button style="text-align: center; color: #0a0a0a;" @click="small++">BUY</button>
+            </div>
+    
+          </div>
+
+    </div>
+
+
+    </div>
+
+
+
+    <div class="pizza contact_us">
+        <h2>Contact details</h2>
+        <br>
+        Contact us at: 011 340 1231
+        <br>
+        info@PerfectPizza.com
+
+
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+</body>
+
+</html>
